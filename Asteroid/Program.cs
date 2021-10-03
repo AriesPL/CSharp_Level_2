@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 /*
  * 1: Добавить класс кометы.
- * 2: Изменить обьекты на картинки.
+ * 2: Привратить в картинки.
  */
 
 namespace Asteroid
