@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Peoples
 {
-	class Worker : People
+	class Freelancer : People
 	{
-		public int payMonth;
+		int payMonth;
 
-		public Worker(string name, string secondName, int age , int payMonth) : base(name, secondName, age)
+		public Freelancer(string name, string secondName, int age, int payMonth) : base(name, secondName, age)
 		{
-			
+
 			this.payMonth = payMonth;
 
 		}
-
 	}
 }

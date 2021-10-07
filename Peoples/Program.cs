@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace Peoples
 {
+	class Comparer : IComparer<Worker>
+	{
+		public int Compare(Worker x, Worker y)
+		{
+			return x.payMonth - y.payMonth;
+		}
+	}
+	
 	class Program
 	{
 		static void Main(string[] args)
@@ -21,13 +29,13 @@ namespace Peoples
 				};
 
 
-			Array.Sort(peoples);
+			Array.Sort(peoples,new Comparer());
 
 			foreach(var el in peoples)
 			{
-				Console.WriteLine($"{0}{1}{2}{3}",peoples.)
-			}
-
+				Console.WriteLine("{0} {1} {2} {3} \n", el.name, el.secondName, el.age, el.payMonth);
+					}
+			Console.ReadLine();
 		}
 	}
 }

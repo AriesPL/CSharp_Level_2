@@ -8,16 +8,18 @@ namespace Peoples
 {
 	abstract class People
 	{
-		string name;
-		string secondName;
-		int age;
+		public string name;
+		public string secondName;
+		public int age;
 
-		public People(string name,string secondName,int age )
+		public People(string name, string secondName, int age)
 		{
 			this.name = name;
 			this.secondName = secondName;
 			this.age = age;
 		}
+
+		
 
 
 
