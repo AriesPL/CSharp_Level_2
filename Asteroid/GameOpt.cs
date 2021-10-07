@@ -1,4 +1,5 @@
-﻿using Asteroid.Properties;
+﻿using Asteroid.GameObj;
+using Asteroid.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,9 +14,10 @@ namespace Asteroid
 	{
 		private static BufferedGraphicsContext _buffContext;
 		public static BufferedGraphics Buffer;
-		static Asteroids[] _asteroids;
-		static Asteroids[] _stars;
-		static Asteroids[] _comets;
+		static BaseGameObj[] _asteroids;
+		static BaseGameObj[] _stars;
+		static BaseGameObj[] _comets;
+		static Bullet _bullet;
 
 		public static int Widht { get; set; }
 		public static int Height { get; set; }
@@ -50,49 +52,56 @@ namespace Asteroid
 		{
 			Buffer.Graphics.DrawImage(Resources.background, new Rectangle(0, 0, Widht, Height));
 
-			foreach(var star in _stars)
+			foreach(BaseGameObj star in _stars)
 			{
 				star.Draw();
 			}
 			
 			Buffer.Graphics.DrawImage(Resources.planet, new Rectangle(40, 40, 100, 100));
 
-			foreach (var asteroid in _asteroids)
+			foreach (BaseGameObj asteroid in _asteroids)
 			{
 				asteroid.Draw();
 			}
 
-			foreach(var comet in _comets)
+			foreach(BaseGameObj comet in _comets)
 			{
 				comet.Draw();
 			}
+
+			_bullet.Draw();
 
 			Buffer.Render();
 		}
 
 		public static void Update()
 		{
-			foreach (var asteroid in _asteroids)
+			foreach (BaseGameObj asteroid in _asteroids)
 			{
+				if (asteroid.Collision(_bullet))
+				{
+					_bullet = new Bullet(new Point(0, 300), new Point(5, 0), new Size(74, 25));
+				}
 				asteroid.Update();
 			}
 
-			foreach (var star in _stars)
+			foreach (BaseGameObj star in _stars)
 			{
 				star.Update();
 			}
-			foreach(var comet in _comets)
+			foreach(BaseGameObj comet in _comets)
 			{
 				comet.Update();
 			}
+			
+			_bullet.Update();
 		}
 
 		public static void Load()
 		{
 			Random random = new Random();
-			_asteroids = new Asteroids[random.Next(5, 15)];
-			
-			
+			_asteroids = new BaseGameObj[random.Next(5, 15)];
+			_bullet = new Bullet(new Point(0, 300), new Point(5, 0), new Size(74, 25));
 
 			for (int i = 0; i < _asteroids.Length; i++)
 			{
@@ -100,18 +109,22 @@ namespace Asteroid
 				int sizeAster = random.Next(10, 100);
 				_asteroids[i] = new Asteroids(new Point(random.Next(20, 980), i*20+20), new Point(-i - 3,-i-3	), new Size(sizeAster, sizeAster));
 			}
-			_stars = new Asteroids[random.Next(20, 40)];
+
+			_stars = new BaseGameObj[random.Next(20, 40)];
 			for (int i = 0; i< _stars.Length;i++)
 			{
 				int sizeStar = random.Next(5, 25);
 				_stars[i] = new Stars(new Point(random.Next(1, 980), random.Next(1, 500)), new Point(i, 1), new Size(sizeStar, sizeStar));
 			}
-			_comets = new Asteroids[2];
+
+			_comets = new BaseGameObj[2];
 			for (int i = 0; i < _comets.Length; i++)
 			{	
 
 				_comets[i] = new Comets(new Point(random.Next(20, 980), random.Next(1, 500)), new Point(10, 1), new Size(40, 40));
 			}
+
+			
 		}
 
 

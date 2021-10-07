@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Asteroid
+namespace Asteroid.GameObj
 {
-	class Comets : Asteroids
+	class Comets : BaseGameObj
 	{
 		public Comets(Point startPos, Point movePos,Size sizeObj) : base (startPos,movePos,sizeObj)
 		{
@@ -19,9 +19,6 @@ namespace Asteroid
 		{
 			GameOpt.Buffer.Graphics.DrawImage(Resources.star3, startPos.X, startPos.Y, sizeObj.Width, sizeObj.Height);
 		}
-		public override void Update()
-		{
-			base.Update();
-		}
+		
 	}
 }
