@@ -8,13 +8,20 @@ namespace Peoples
 {
 	class Freelancer : People
 	{
-		int payMonth;
+		
 
-		public Freelancer(string name, string secondName, int age, int payMonth) : base(name, secondName, age)
+		public Freelancer(string name, string secondName, decimal salary) : base(name, secondName, salary)
 		{
+		}
 
-			this.payMonth = payMonth;
+		public override decimal СalculateSalary()
+		{
+			return (decimal)20.8 * 8 * salary;
+		}
 
+		public override string ToString()
+		{
+			return $"{secondName} {name}; Фрилансер; Среднемесячная заработная плата: {СalculateSalary()} (руб.); Почасовая ставка: {salary} (руб.)";
 		}
 	}
 }

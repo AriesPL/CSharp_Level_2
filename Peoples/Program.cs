@@ -6,35 +6,61 @@ using System.Threading.Tasks;
 
 namespace Peoples
 {
-	class Comparer : IComparer<Worker>
+	class Comparer : IComparer<People>
 	{
-		public int Compare(Worker x, Worker y)
-		{
-			return x.payMonth - y.payMonth;
+			public int Compare(People x, People y)
+			{
+			if (x.СalculateSalary() > y.СalculateSalary()) return 1;
+			if (x.СalculateSalary() < y.СalculateSalary()) return -1;
+			return 0;
+
+
+			//return x.СalculateSalary() > y.СalculateSalary() ? 1 : -1;
+
 		}
 	}
 	
+
 	class Program
 	{
+		private static Random random = new Random();
+
+		static People GenerateEmployee()
+		{
+			var names = new[] { "Анатолий", "Глеб", "Клим", "Мартин", "Лазарь", "Владлен", "Клим", "Панкратий", "Рубен", "Герман" };
+			var secondName = new[] { "Григорьев", "Фокин", "Шестаков", "Хохлов", "Шубин", "Бирюков", "Копылов", "Горбунов", "Лыткин", "Соколов" };
+
+			var typeIndex = random.Next(0, 2);
+			var salary = random.Next(200, 501);
+			var salaryIndex = random.Next(100, 160);
+			switch (typeIndex)
+			{
+				case 0:
+					return new Freelancer(names[random.Next(0, 10)], secondName[random.Next(0, 10)], salary);
+				case 1:
+					return new Worker(names[random.Next(0, 10)], secondName[random.Next(0, 10)], salary * salaryIndex);
+			}
+			return null;
+		}
+
 		static void Main(string[] args)
 		{
 
-			var peoples = new Worker[]
-				{
-					new Worker("Аксель","Фоли",20,20000),
-					new Worker("Андрей","Фоли",24,120000),
-					new Worker("Алексей","Фоли",26,520000),
-					new Worker("Астап","Фоли",30,23000),
-					new Worker("Август","Фоли",40,25400),
-				};
+			People[] peoples = new People[10];
+			for (int i = 0; i < peoples.Length; i++)
+				peoples[i] = GenerateEmployee();
 
+			foreach (var people in peoples)
+				Console.WriteLine(people);
 
-			Array.Sort(peoples,new Comparer());
+			Console.WriteLine();
+			Array.Sort(peoples, new Comparer());
 
-			foreach(var el in peoples)
-			{
-				Console.WriteLine("{0} {1} {2} {3} \n", el.name, el.secondName, el.age, el.payMonth);
-					}
+			Console.WriteLine("\n*** Отсортированный массив сотрудников ***\n");
+			foreach (var people in peoples)
+				Console.WriteLine(people);
+
+			
 			Console.ReadLine();
 		}
 	}

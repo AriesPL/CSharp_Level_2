@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Peoples
 {
-	abstract class People
+	public abstract class People
 	{
-		public string name;
-		public string secondName;
-		public int age;
+		public string name { get; set; }
+		public string secondName { get; set; }
+		public decimal salary { get; set; }
 
-		public People(string name, string secondName, int age)
+		public People(string name, string secondName, decimal salary)
 		{
 			this.name = name;
 			this.secondName = secondName;
-			this.age = age;
+			this.salary = salary;
 		}
 
-		
+		public abstract decimal СalculateSalary();
+
+
 
 
 

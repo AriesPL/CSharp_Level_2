@@ -8,14 +8,22 @@ namespace Peoples
 {
 	class Worker : People
 	{
-		public int payMonth;
+	
 
-		public Worker(string name, string secondName, int age , int payMonth) : base(name, secondName, age)
+		public Worker(string name, string secondName, decimal salary) : base(name, secondName, salary)
 		{
-			
-			this.payMonth = payMonth;
-
 		}
+
+		public override decimal СalculateSalary()
+		{
+			return salary;
+		}
+
+		public override string ToString()
+		{
+			return $"{secondName} {name}; Рабочий; Среднемесячная заработная плата (фиксированная месячная оплата): {СalculateSalary()} (руб.)";
+		}
+
 
 	}
 }
