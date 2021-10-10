@@ -1,4 +1,5 @@
-﻿using Asteroid.Properties;
+﻿using Asteroid.Events;
+using Asteroid.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,11 +11,8 @@ namespace Asteroid
 {
 	class Asteroids : BaseGameObj
 	{
-		
-
 		public Asteroids(Point startPos,Point movePos,Size sizeObj) : base (startPos, movePos, sizeObj)
 		{
-			
 		}
 
 		public override void Draw()
@@ -28,6 +26,5 @@ namespace Asteroid
 			if (sizeObj.Width > 80)
 				GameOpt.Buffer.Graphics.DrawImage(Resources.meteorBrown_big1, startPos.X, startPos.Y, sizeObj.Width, sizeObj.Height);
 		}
-
 	}
 }

@@ -12,7 +12,6 @@ namespace Asteroid.GameObj
 	{
 		public Comets(Point startPos, Point movePos,Size sizeObj) : base (startPos,movePos,sizeObj)
 		{
-
 		}
 
 		public override void Draw()

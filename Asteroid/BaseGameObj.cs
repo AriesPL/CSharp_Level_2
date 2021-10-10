@@ -46,10 +46,10 @@ namespace Asteroid
 		{
 
 			if (startPos.X < 0) movePos.X = -movePos.X;
-			if (startPos.X > GameOpt.Widht) movePos.X = -movePos.X;
+			if (startPos.X > GameOpt.Widht - sizeObj.Width) movePos.X = -movePos.X;
 
 			if (startPos.Y < 0) movePos.Y = -movePos.Y;
-			if (startPos.Y > GameOpt.Height) movePos.Y = -movePos.Y;
+			if (startPos.Y > GameOpt.Height - sizeObj.Height) movePos.Y = -movePos.Y;
 		}
 	}
 }

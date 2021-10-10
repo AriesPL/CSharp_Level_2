@@ -48,9 +48,11 @@
   <ItemGroup>
     <Compile Include="BaseGameObj.cs" />
     <Compile Include="Collisions\ICollision.cs" />
+    <Compile Include="Events\DieEventArgs.cs" />
     <Compile Include="GameObj\Asteroids.cs" />
     <Compile Include="GameObj\Bullet.cs" />
     <Compile Include="GameObj\Comets.cs" />
+    <Compile Include="GameObj\Ship.cs" />
     <Compile Include="GameOpt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Bullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laserRed011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

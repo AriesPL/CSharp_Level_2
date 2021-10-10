@@ -10,12 +10,12 @@ namespace Peoples
 	{
 			public int Compare(People x, People y)
 			{
-			if (x.СalculateSalary() > y.СalculateSalary()) return 1;
-			if (x.СalculateSalary() < y.СalculateSalary()) return -1;
-			return 0;
+			//if (x.СalculateSalary() > y.СalculateSalary()) return 1;
+			//if (x.СalculateSalary() < y.СalculateSalary()) return -1;
+			//return 0;
 
 
-			//return x.СalculateSalary() > y.СalculateSalary() ? 1 : -1;
+			return x.СalculateSalary() > y.СalculateSalary() ? 1 : -1;
 
 		}
 	}

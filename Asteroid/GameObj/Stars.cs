@@ -13,7 +13,6 @@ namespace Asteroid.GameObj
 
 		public Stars(Point startPos, Point movePos, Size sizeObj) : base(startPos, movePos, sizeObj)
 		{
-
 		}
 
 		public override void Draw()

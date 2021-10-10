@@ -17,7 +17,7 @@ namespace Asteroid.GameObj
 
 		public override void Draw()
 		{
-			GameOpt.Buffer.Graphics.DrawImage(Resources.Bullet, startPos.X, startPos.Y, sizeObj.Width, sizeObj.Height);
+			GameOpt.Buffer.Graphics.DrawImage(Resources.laserRed011, startPos.X, startPos.Y, sizeObj.Width, sizeObj.Height);
 		}
 
 		public override void Update()
