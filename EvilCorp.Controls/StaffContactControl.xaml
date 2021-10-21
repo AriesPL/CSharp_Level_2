@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="EvilCorp.Controls.StaffContactControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EvilCorp.Controls"
+             mc:Ignorable="d" Height="324.8" Width="477.2">
+    <Grid Margin="0,0,-1.2,-0.8">
+
+
+        <Label Content="Номер телефона:" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112"/>
+        <TextBox Margin="103,0,0.6,0" Name="tbPhone"
+                 TextWrapping="Wrap" Height="25" VerticalAlignment="Top" />
+        <TextBox Margin="103,30,0.6,0" Name="tbName"
+                 TextWrapping="Wrap" Height="25" VerticalAlignment="Top" />
+        <TextBox Margin="103,59,0.6,0" Name="tbLastName"
+                 TextWrapping="Wrap" Height="25" VerticalAlignment="Top"/>
+        <TextBox Margin="103,89,0.6,0" Name="tbSecondName"
+                 TextWrapping="Wrap" Height="25" VerticalAlignment="Top"/>
+        <Label Content="Имя:" Margin="0,59,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="103"/>
+        <Label Content="Фамилия:" Margin="0,30,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="91"/>
+        <Label Content="Отчество:" Margin="0,89,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="87"/>
+        <CheckBox Content="Арестован" Name="cbFreeNow"
+                  Margin="103,119,0,0" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
+        <ComboBox Margin="10,142,10.6,0" Name="cbCategory" Height="26" VerticalAlignment="Top"/>
+        <TextBox Margin="10,181,10,0" x:Name="tbComment"
+            TextWrapping="Wrap" Height="131" VerticalAlignment="Top" />
+
+    </Grid>
+</UserControl>
