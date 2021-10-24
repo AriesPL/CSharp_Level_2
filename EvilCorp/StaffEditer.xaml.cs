@@ -25,12 +25,12 @@ namespace EvilCorp
 		public StaffEditer()
 		{
 			InitializeComponent();
-			staffControl.SetStuff(Staff);
+			staffControl.Staff = Staff;
 		}
 
 		private void btAddStuff_Click(object sender, RoutedEventArgs e)
 		{
-			staffControl.UpdateStaff();
+			//staffControl.UpdateStaff();
 			DialogResult = true;
 		}
 

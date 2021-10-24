@@ -1,28 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EvilCorp.Data
 {
-	public class Staff
+	public class Staff : INotifyPropertyChanged, ICloneable
 	{
-		public string Phone { get; set; }
-		public string Name { get; set; }
-		public string SecondName { get; set; }
-		public string LastName { get; set; }
-		public string Comment { get; set; }
-		public bool FreeNow { get; set; }
-		public StaffCategory Category { get; set; } = StaffCategory.Раб;
+		//Событие делегата
+		public event PropertyChangedEventHandler PropertyChanged;
 
-		public string FIO
+		private string _phone;
+		private StaffName _name = StaffName.Алексей;
+		private StaffSecondName _secondName = StaffSecondName.Александрович;
+		private StaffLastName _lastName = StaffLastName.Сергеев;
+		private string _comment;
+		private bool _freeNow;
+		private StaffCategory _category = StaffCategory.Раб;
+		
+		private void NotifyPropertyChanged([CallerMemberName]string propertyName = "") //Позволяет получить имя свойства или метода вызывающего метод объекта.
 		{
-			get { return $"{LastName} {Name} {SecondName}"; }
+			if (PropertyChanged != null) // Если свойство не равно null
+				PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName)); //Возбуждаем событие с заданным свойством
 		}
+		
+		public object Clone()
+		{
+			return this.MemberwiseClone();
+		}
+
+		public string Phone
+		{
+			get { return _phone; }
+			set 
+			{ 
+				_phone = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		public StaffName Name
+		{
+			get { return _name; }
+			set 
+			{ 
+				_name = value;
+				NotifyPropertyChanged();
+			}
+		}
+		public StaffSecondName SecondName
+		{
+			get { return _secondName; }
+			set 
+			{
+				_secondName = value;
+				NotifyPropertyChanged();
+			}
+		}
+		public StaffLastName LastName
+		{
+			get { return _lastName; }
+			set 
+			{
+				_lastName = value;
+				NotifyPropertyChanged();
+			}
+		}
+		public string Comment
+		{
+			get { return _comment; }
+			set 
+			{
+				_comment = value;
+				NotifyPropertyChanged();
+			}
+		}
+		public bool FreeNow
+		{
+			get { return _freeNow; }
+			set 
+			{
+				_freeNow = value;
+				NotifyPropertyChanged();
+			}
+		}
+		public StaffCategory Category
+		{
+			get { return _category; }
+			set 
+			{
+				_category = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		//public string FIO
+		//{
+		//	get { return $"{LastName} {Name} {SecondName}"; }
+		//}
 		public Staff() { }
 
-		public Staff(string phone, string name, string secondname, string lastname, string comment, bool freenow, StaffCategory category)
+		public Staff(string phone, StaffName name, StaffSecondName secondname, StaffLastName lastname, string comment, bool freenow, StaffCategory category)
 		{
 			Phone = phone;
 			Name = name;
@@ -32,6 +113,7 @@ namespace EvilCorp.Data
 			FreeNow = freenow;
 			Category = category;
 		}
+
 
 	}
 }

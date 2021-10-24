@@ -1,6 +1,7 @@
 ﻿using EvilCorp.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,53 +23,61 @@ namespace EvilCorp
 	public partial class MainWindow : Window
 	{
 		private EvilCorpDatabase _evilCorpDatabase = new EvilCorpDatabase();
+
+		public ObservableCollection<Staff> StaffList { get; set; }
+
+		public Staff SelectedStaff { get; set; }
+
 		public MainWindow()
 		{
 			InitializeComponent();
-			UpdateList();
+			DataContext = this;
+			StaffList = _evilCorpDatabase.Staffs;
+			//UpdateList();
 		}
 		
-		private void lvStaff_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void lvStaff_SelectionChanged(object sender, SelectionChangedEventArgs e) //Событие происходящее с Ляистом персонала
 		{
 			if(e.AddedItems.Count != 0)
 			{
-				StaffControl.SetStuff((Staff)e.AddedItems[0]);
+				StaffControl.Staff = (Staff)SelectedStaff.Clone();
 			}
 		}
 
-		private void btDelete_Click(object sender, RoutedEventArgs e)
+		private void btDelete_Click(object sender, RoutedEventArgs e) //Кнопка удаления
 		{
-			if (lvStaff.SelectedItems.Count < 1) return;
+			if (SelectedStaff == null) return;
 
 			if (MessageBox.Show("Вы хотите его удалить?", "Удаление персонала.", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
-				_evilCorpDatabase.Staffs.Remove((Staff)lvStaff.SelectedItems[0]);
-				UpdateList();
+				_evilCorpDatabase.Staffs.Remove(SelectedStaff);
+				//UpdateList();
+
 			}
 			
 		}
 
-		private void btUpdate_Click(object sender, RoutedEventArgs e)
+		private void btUpdate_Click(object sender, RoutedEventArgs e) //Кнопка обновления
 		{
 			if (lvStaff.SelectedItems.Count < 1) return;
-
-			StaffControl.UpdateStaff();
-			UpdateList();
+			StaffList[StaffList.IndexOf(SelectedStaff)] = StaffControl.Staff;
+			//StaffControl.UpdateStaff();
+			//UpdateList();
 		}
 
-		private void UpdateList()
-		{
-			lvStaff.ItemsSource = null;
-			lvStaff.ItemsSource = _evilCorpDatabase.Staffs;
-		}
+		//private void UpdateList()
+		//{
+		//	lvStaff.ItemsSource = null;
+		//	lvStaff.ItemsSource = _evilCorpDatabase.Staffs;
+		//}
 
-		private void btAddNew_Click(object sender, RoutedEventArgs e)
+		private void btAddNew_Click(object sender, RoutedEventArgs e) //Кнопка добавления
 		{
 			StaffEditer staffEditer = new StaffEditer();
 			if(staffEditer.ShowDialog() == true)
 			{
 				_evilCorpDatabase.Staffs.Add(staffEditer.Staff);
-				UpdateList();
+				//UpdateList();
 			}
 		}
 	}

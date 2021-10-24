@@ -9,14 +9,19 @@
         Title="MainWindow" Height="709.6" Width="801.6">
     <Grid Margin="0,0,3.6,21">
 
-        <ListView x:Name="lvStaff" Margin="0,0,284,9.8"
+        <ListView x:Name="lvStaff"
+                    ItemsSource="{Binding StaffList}"
+                  SelectedItem="{Binding SelectedStaff}"
+                    Margin="0,0,284,9.8"
                   SelectionMode="Single" SelectionChanged="lvStaff_SelectionChanged" HorizontalAlignment="Right" Width="504" Height="644" VerticalAlignment="Bottom">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100" Header="Телефон"
                                     DisplayMemberBinding="{Binding Phone}"/>
-                    <GridViewColumn Width="auto" Header="ФИО"
-                                    DisplayMemberBinding="{Binding FIO}"/>
+                    <GridViewColumn Width="auto" Header="Фамилия"
+                                    DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Width="auto" Header="Имя"
+                                    DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Width="100" Header="Специализация"
                                     DisplayMemberBinding="{Binding Category}"/>
                     <GridViewColumn Width="100" Header="Арестован"

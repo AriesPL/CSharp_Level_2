@@ -1,6 +1,7 @@
 ﻿using EvilCorp.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,11 @@ namespace EvilCorp
 		private static int Char_Bound_H = 90;
 
 		public Random _random = new Random();
-		public List<Staff> Staffs { get; set; }
+		public ObservableCollection<Staff> Staffs { get; set; }
 
 		public EvilCorpDatabase()
 		{
-			Staffs = new List<Staff>();
+			Staffs = new ObservableCollection<Staff>();
 			GenerateEvilContacts(50);
 		}
 
@@ -49,9 +50,9 @@ namespace EvilCorp
 		{
 			Staffs.Clear();
 
-			string name = GenerateSymbols(_random.Next(6) + 5);
-			string secondName = GenerateSymbols(_random.Next(6) + 5);
-			string lastName = GenerateSymbols(_random.Next(6) + 5);
+			var name = (StaffName)_random.Next(0, 5);
+			var secondName = (StaffSecondName)_random.Next(0, 5);
+			var lastName = (StaffLastName)_random.Next(0, 5);
 			string comment = GenerateSymbols(_random.Next(6) + 50);
 
 			var freeNow = _random.Next(0, 2) == 0 ? false : true;
@@ -59,15 +60,13 @@ namespace EvilCorp
 
 			for (int i = 0; i < contactCounts; i++)
 			{
-				if (_random.Next(2) == 0)
-				{
-					name = GenerateSymbols(_random.Next(6) + 5);
-					secondName = GenerateSymbols(_random.Next(6) + 5);
-					lastName = GenerateSymbols(_random.Next(6) + 5);
-					comment = GenerateSymbols(_random.Next(6) + 50);
-					freeNow = _random.Next(0, 2) == 0 ? false : true;
-					category = (StaffCategory)_random.Next(0, 6);
-				}
+				name = (StaffName)_random.Next(0, 5);
+				secondName = (StaffSecondName)_random.Next(0, 5);
+				lastName = (StaffLastName)_random.Next(0, 5);
+				comment = GenerateSymbols(_random.Next(6) + 50);
+				freeNow = _random.Next(0, 2) == 0 ? false : true;
+				category = (StaffCategory)_random.Next(0, 6);
+
 				string phone = GeneratePhone();
 				Staffs.Add(new Staff(phone, name, secondName, lastName, comment, freeNow, category));
 			}
