@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilCorp.Data", "EvilCorp.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilCorp.Controls", "EvilCorp.Controls\EvilCorp.Controls.csproj", "{EE8F7AA7-7710-4A61-B199-B31D69BB8F08}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{189A1E06-207C-41FF-ACF4-3F6E321DD7F1}"
+	ProjectSection(SolutionItems) = preProject
+		CreateSQL.txt = CreateSQL.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

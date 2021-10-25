@@ -14,9 +14,9 @@ namespace EvilCorp.Data
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private string _phone;
-		private StaffName _name = StaffName.Алексей;
-		private StaffSecondName _secondName = StaffSecondName.Александрович;
-		private StaffLastName _lastName = StaffLastName.Сергеев;
+		private string _name;
+		private string _secondName;
+		private string _lastName;
 		private string _comment;
 		private bool _freeNow;
 		private StaffCategory _category = StaffCategory.Раб;
@@ -42,7 +42,7 @@ namespace EvilCorp.Data
 			}
 		}
 
-		public StaffName Name
+		public string Name
 		{
 			get { return _name; }
 			set 
@@ -51,7 +51,7 @@ namespace EvilCorp.Data
 				NotifyPropertyChanged();
 			}
 		}
-		public StaffSecondName SecondName
+		public string SecondName
 		{
 			get { return _secondName; }
 			set 
@@ -60,7 +60,7 @@ namespace EvilCorp.Data
 				NotifyPropertyChanged();
 			}
 		}
-		public StaffLastName LastName
+		public string LastName
 		{
 			get { return _lastName; }
 			set 
@@ -103,7 +103,7 @@ namespace EvilCorp.Data
 		//}
 		public Staff() { }
 
-		public Staff(string phone, StaffName name, StaffSecondName secondname, StaffLastName lastname, string comment, bool freenow, StaffCategory category)
+		public Staff(string phone, string name, string secondname, string lastname, string comment, bool freenow, StaffCategory category)
 		{
 			Phone = phone;
 			Name = name;

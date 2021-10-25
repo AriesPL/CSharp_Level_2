@@ -12,10 +12,10 @@
         <TextBox Text="{Binding Staff.Phone}"
                     Margin="103,0,9.8,0" 
                  TextWrapping="Wrap" Height="25" VerticalAlignment="Top" />
-        <TextBox Text="{Binding Staff.Name}"
+        <TextBox Text="{Binding Staff.LastName}"
                 Margin="103,30,9.8,0" 
                  TextWrapping="Wrap" Height="25" VerticalAlignment="Top" />
-        <TextBox Text="{Binding Staff.LastName}"
+        <TextBox Text="{Binding Staff.Name}"
             Margin="103,59,9.8,0" 
                  TextWrapping="Wrap" Height="25" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Staff.SecondName}"
