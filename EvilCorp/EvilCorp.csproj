@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -103,13 +104,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EvilCorp.Commun\EvilCorp.Commun.csproj">
+      <Project>{7203181d-9329-41a5-adf1-ef5b33a9ef3e}</Project>
+      <Name>EvilCorp.Commun</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EvilCorp.Controls\EvilCorp.Controls.csproj">
       <Project>{ee8f7aa7-7710-4a61-b199-b31d69bb8f08}</Project>
       <Name>EvilCorp.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EvilCorp.Data\EvilCorp.Data.csproj">
-      <Project>{eebe335c-45cf-4661-a4fe-c6fdc4577124}</Project>
-      <Name>EvilCorp.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

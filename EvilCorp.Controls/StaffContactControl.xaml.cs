@@ -1,4 +1,4 @@
-﻿using EvilCorp.Data;
+﻿using EvilCorp.Commun.EvilCorpService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -56,13 +56,13 @@ namespace EvilCorp.Controls
 
 		private void StaffCategory()
 		{
-			StaffList.Add(Data.StaffCategory.Адвокат);
-			StaffList.Add(Data.StaffCategory.Вор);
-			StaffList.Add(Data.StaffCategory.Наемник);
-			StaffList.Add(Data.StaffCategory.Оружейник);
-			StaffList.Add(Data.StaffCategory.Телохранитель);
-			StaffList.Add(Data.StaffCategory.Убийца);
-			StaffList.Add(Data.StaffCategory.Раб);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Адвокат);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Вор);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Наемник);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Оружейник);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Телохранитель);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Убийца);
+			StaffList.Add(Commun.EvilCorpService.StaffCategory.Раб);
 		}
 
 

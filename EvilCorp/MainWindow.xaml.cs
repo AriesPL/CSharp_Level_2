@@ -1,4 +1,4 @@
-﻿using EvilCorp.Data;
+﻿using EvilCorp.Commun.EvilCorpService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,10 +35,10 @@ namespace EvilCorp
 			StaffList = _evilCorpDatabase.Staffs;
 			//UpdateList();
 		}
-		
-		private void lvStaff_SelectionChanged(object sender, SelectionChangedEventArgs e) //Событие происходящее с Ляистом персонала
+
+		private void lvStaff_SelectionChanged(object sender, SelectionChangedEventArgs e) //Событие происходящее с листом персонала
 		{
-			if(e.AddedItems.Count != 0)
+			if (e.AddedItems.Count != 0)
 			{
 				StaffControl.Staff = (Staff)SelectedStaff.Clone();
 			}
@@ -50,19 +50,42 @@ namespace EvilCorp
 
 			if (MessageBox.Show("Вы хотите его удалить?", "Удаление персонала.", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
-				_evilCorpDatabase.Staffs.Remove(SelectedStaff);
-				//UpdateList();
-
+				if (_evilCorpDatabase.Remove(SelectedStaff) > 0)
+				{
+					//_evilCorpDatabase.Staffs.Remove(SelectedStaff);
+					MessageBox.Show("Запись успешно удалена.", "Удаление записи", MessageBoxButton.OK, MessageBoxImage.Information);
+					//UpdateList();
+				}
 			}
-			
+
 		}
 
 		private void btUpdate_Click(object sender, RoutedEventArgs e) //Кнопка обновления
 		{
 			if (lvStaff.SelectedItems.Count < 1) return;
-			StaffList[StaffList.IndexOf(SelectedStaff)] = StaffControl.Staff;
-			//StaffControl.UpdateStaff();
-			//UpdateList();
+			if (_evilCorpDatabase.Update(SelectedStaff) > 0)
+			{
+
+				StaffList[StaffList.IndexOf(SelectedStaff)] = StaffControl.Staff;
+				MessageBox.Show("Запись упешно обнавлена", "Обновление записи", MessageBoxButton.OK, MessageBoxImage.Information);
+				//StaffControl.UpdateStaff();
+				//UpdateList();
+			}
+		}
+
+		private void btAddNew_Click(object sender, RoutedEventArgs e) //Кнопка добавления
+		{
+			StaffEditer staffEditer = new StaffEditer();
+			if (staffEditer.ShowDialog() == true)
+			{
+				if (_evilCorpDatabase.Add(SelectedStaff) > 0)
+				{
+
+					_evilCorpDatabase.Staffs.Add(SelectedStaff);
+				MessageBox.Show("Запись успешно добавлена.", "Добавление записи", MessageBoxButton.OK, MessageBoxImage.Information);
+					//UpdateList();
+				}
+			}
 		}
 
 		//private void UpdateList()
@@ -70,15 +93,5 @@ namespace EvilCorp
 		//	lvStaff.ItemsSource = null;
 		//	lvStaff.ItemsSource = _evilCorpDatabase.Staffs;
 		//}
-
-		private void btAddNew_Click(object sender, RoutedEventArgs e) //Кнопка добавления
-		{
-			StaffEditer staffEditer = new StaffEditer();
-			if(staffEditer.ShowDialog() == true)
-			{
-				_evilCorpDatabase.Staffs.Add(staffEditer.Staff);
-				//UpdateList();
-			}
-		}
 	}
 }
