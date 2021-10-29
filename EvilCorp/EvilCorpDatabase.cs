@@ -1,4 +1,4 @@
-﻿using EvilCorp.Data;
+﻿using EvilCorp.Commun.EvilCorpService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,22 +12,20 @@ namespace EvilCorp
 
 	public class EvilCorpDatabase
 	{
-		private const string ConnectionStringSQL = "Data Source =DESKTOP-4HT1J9M\\SQLEXPRESS; Initial Catalog = StaffSQL; User ID = Userg; Password = 123456";
-
 		//private static string[] FirstName = { "Алексей","Андрей" ,"Егор" ,"Александр" ,"Мотвей","Станислав" };
 		//private static string[] SecondName = { "Алексеевич", "Андреевич", "Егорович", "Александрович", "Мотвеевич", "Станиславович" };
 		//private static string[] LastName = { "Сергеев", "Бондаренко", "Петров", "Соколов", "Давыдов", "Измайлов" };
 		//private static string[] Phone_Prefix = { "902", "913", "923" };
 		//private static int Char_Bound_L = 65;
 		//private static int Char_Bound_H = 90;
-
-		public Random _random = new Random();
+		//public Random _random = new Random();
+		private EvilCorpServiceSoapClient _evilCorpServiceSoapClient = new EvilCorpServiceSoapClient();
 		public ObservableCollection<Staff> Staffs { get; set; }
 
 		public EvilCorpDatabase()
 		{
 			Staffs = new ObservableCollection<Staff>();
-			LoadFromDatabase();
+			Load();
 			//GenerateEvilContacts(50);
 			//SQLSyncTo();
 		}
@@ -39,85 +37,37 @@ namespace EvilCorp
 		//		AddStaff(staff);
 		//	}
 		//}
-		private void LoadFromDatabase()
+		private void Load()
 		{
-			string sqlExpression = "SELECT * FROM StaffSQL"; 
-			using (SqlConnection _sqlConnection = new SqlConnection(ConnectionStringSQL))
+			foreach(var el in _evilCorpServiceSoapClient.LoadStaff())
 			{
-				_sqlConnection.Open();
-				SqlCommand _command = new SqlCommand(sqlExpression, _sqlConnection);
-				using (SqlDataReader reader = _command.ExecuteReader())
-				{
-					if (reader.HasRows)        // Если есть данные
-					{
-						while (reader.Read())  // Построчно считываем данные
-						{
-							var staff = new Staff()
-							{
-								Phone = reader.GetValue(0).ToString(), // Прочитать из столбца
-								LastName = reader["LastName"].ToString(), //Прочитать из столбца LastName
-								Name = reader.GetString(2),                 // Взять строковое значение из столбца
-								SecondName = reader["SecondName"].ToString(),
-								Comment = reader["Comment"].ToString(),
-								FreeNow = reader.GetBoolean(4),
-								Category = (StaffCategory)reader.GetInt32(6)
-							};
-							Staffs.Add(staff);
-						}
-					}
-				}
+				Staffs.Add(el);
 			}
 		}
 
-		public int AddStaff(Staff staff)
+		public int Add(Staff staff)
 		{
-			using(SqlConnection _sqlConnection = new SqlConnection(ConnectionStringSQL))
+			var res = _evilCorpServiceSoapClient.AddStaff(staff);
+			if(res > 0)
 			{
-				_sqlConnection.Open();
-
-				var _loked = staff.FreeNow ? 1 : 0;
-				string _sqlExpression = $@"INSERT INTO StaffSQL (Phone,FirstName,LastName,SecondName,Comment,FreeNow,StaffCategory)
-											VALUES ('{staff.Phone}', '{staff.Name}', '{staff.LastName}', '{staff.SecondName}', '{staff.Comment}', '{_loked}', '{(int)staff.Category}')";
-				var _command = new SqlCommand(_sqlExpression, _sqlConnection);
-				var _exRes = _command.ExecuteNonQuery();
-				if (_exRes > 0)
-				{
-					Staffs.Add(staff);
-				}
-				return _exRes;
+				Staffs.Add(staff);
 			}
+			return res;
 			
 		}
-		public int UpdateStaff(Staff staff)
+		public int Update(Staff staff)
 		{
-			using (SqlConnection _sqlConnection = new SqlConnection(ConnectionStringSQL))
-			{
-				_sqlConnection.Open();
-
-				var _locked = staff.FreeNow ? 1 : 0;
-				string sqlExpression = $@"UPDATE StaffSQL 
-                    SET LastName = '{staff.LastName}', FirstName = '{staff.Name}', SecondName = '{staff.SecondName}', Comment = '{staff.Comment}', Locked = {_locked}, CategoryId = {(int)staff.Category}
-                    WHERE phone = '{staff.Phone}'";
-				var _command = new SqlCommand(sqlExpression, _sqlConnection);
-				return _command.ExecuteNonQuery();
-			}
+			return _evilCorpServiceSoapClient.UpdateStaff(staff);
 		}
 
-		public int RemoveStaff(Staff staff)
+		public int Remove(Staff staff)
 		{
-			using (SqlConnection _sqlConnection = new SqlConnection(ConnectionStringSQL))
+			var res = _evilCorpServiceSoapClient.RemoveStaff(staff);
+			if( res > 0)
 			{
-				_sqlConnection.Open();
-
-				string sqlExpression = $@"DELETE FROM StaffSQL WHERE Phone = '{staff.Phone}'";
-				var _command = new SqlCommand(sqlExpression, _sqlConnection);
-				var res = _command.ExecuteNonQuery();
-				if (res > 0)
-				{
-					Staffs.Remove(staff);
-				}
-				return res;
+				Staffs.Remove(staff);
 			}
+			return res;
 		}
 
 
