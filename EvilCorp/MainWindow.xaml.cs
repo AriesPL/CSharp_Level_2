@@ -78,10 +78,10 @@ namespace EvilCorp
 			StaffEditer staffEditer = new StaffEditer();
 			if (staffEditer.ShowDialog() == true)
 			{
-				if (_evilCorpDatabase.Add(SelectedStaff) > 0)
+				if (_evilCorpDatabase.Add(staffEditer.Staff) > 0)
 				{
 
-					_evilCorpDatabase.Staffs.Add(SelectedStaff);
+					//_evilCorpDatabase.Staffs.Add(SelectedStaff);
 				MessageBox.Show("Запись успешно добавлена.", "Добавление записи", MessageBoxButton.OK, MessageBoxImage.Information);
 					//UpdateList();
 				}

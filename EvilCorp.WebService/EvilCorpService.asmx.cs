@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -19,7 +20,9 @@ namespace EvilCorp.WebService
 	// [System.Web.Script.Services.ScriptService]
 	public class EvilCorpService : System.Web.Services.WebService
 	{
-		private const string ConnectionStringSQL = "Data Source =DESKTOP-4HT1J9M\\SQLEXPRESS; Initial Catalog = StaffSQL; User ID = Userg; Password = 123456";
+
+
+		private string ConnectionStringSQL = ConfigurationManager.ConnectionStrings["EvilCorpConnectionString"].ConnectionString;
 
 		[WebMethod]
 		public ObservableCollection<Staff> LoadStaff()
@@ -62,7 +65,7 @@ namespace EvilCorp.WebService
 
 				//var _loked = staff.FreeNow ? 1 : 0;
 				string _sqlExpression = $@"INSERT INTO StaffSQL (Phone,FirstName,LastName,SecondName,Comment,FreeNow,StaffCategory)
-											VALUES ('{staff.Phone}','{staff.Name}','{staff.LastName}','{staff.SecondName}','{staff.Comment}','{staff.FreeNow}','{(int)staff.Category}')";
+											VALUES ('{staff.Phone}','{staff.Name}','{staff.LastName}','{staff.SecondName}','{staff.Comment}','{staff.FreeNow}','{(int)staff.Category + 1}')";
 				var _command = new SqlCommand(_sqlExpression, _sqlConnection);
 				return _command.ExecuteNonQuery();
 				//if (_exRes > 0)
@@ -82,7 +85,7 @@ namespace EvilCorp.WebService
 
 				var _locked = staff.FreeNow ? 1 : 0;
 				string sqlExpression = $@"UPDATE StaffSQL 
-                    SET LastName = '{staff.LastName}', FirstName = '{staff.Name}', SecondName = '{staff.SecondName}', Comment = '{staff.Comment}', FreeNow = {_locked}, StaffCategory = {(int)staff.Category}
+                    SET LastName = '{staff.LastName}', FirstName = '{staff.Name}', SecondName = '{staff.SecondName}', Comment = '{staff.Comment}', FreeNow = {_locked}, StaffCategory = {(int)staff.Category + 1}
                     WHERE phone = '{staff.Phone}'";
 				var _command = new SqlCommand(sqlExpression, _sqlConnection);
 				return _command.ExecuteNonQuery();
