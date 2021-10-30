@@ -20,8 +20,6 @@ namespace EvilCorp.WebService
 	// [System.Web.Script.Services.ScriptService]
 	public class EvilCorpService : System.Web.Services.WebService
 	{
-
-
 		private string ConnectionStringSQL = ConfigurationManager.ConnectionStrings["EvilCorpConnectionString"].ConnectionString;
 
 		[WebMethod]
@@ -63,7 +61,7 @@ namespace EvilCorp.WebService
 			{
 				_sqlConnection.Open();
 
-				//var _loked = staff.FreeNow ? 1 : 0;
+				
 				string _sqlExpression = $@"INSERT INTO StaffSQL (Phone,FirstName,LastName,SecondName,Comment,FreeNow,StaffCategory)
 											VALUES ('{staff.Phone}','{staff.Name}','{staff.LastName}','{staff.SecondName}','{staff.Comment}','{staff.FreeNow}','{(int)staff.Category + 1}')";
 				var _command = new SqlCommand(_sqlExpression, _sqlConnection);
