@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EvilCorp"
+        xmlns:Controls="clr-namespace:EvilCorp.Controls;assembly=EvilCorp.Controls" x:Class="EvilCorp.StaffEditer"
+        mc:Ignorable="d"
+        Title="StaffEditer" Height="481.2" Width="389.519">
+    <Grid>
+
+        <Controls:StaffContactControl x:Name="staffControl" Height="Auto" Width="Auto" Margin="14,14,-0.2,79.4"/>
+        <Button Content="Отмена" Name="btCansel" HorizontalAlignment="Right" Margin="0,0,9.8,10.4" VerticalAlignment="Bottom" Width="103" Height="45" Click="btCansel_Click"/>
+        <Button Content="Добавить" Name="btAddStuff" HorizontalAlignment="Right" Margin="0,0,117.8,10.4" VerticalAlignment="Bottom" Width="103" Height="45" Click="btAddStuff_Click"/>
+
+    </Grid>
+</Window>

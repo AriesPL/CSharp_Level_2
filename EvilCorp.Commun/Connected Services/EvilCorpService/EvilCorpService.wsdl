@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="LoadStaff">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadStaffResult" type="tns:ArrayOfStaff" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStaff">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Staff" nillable="true" type="tns:Staff" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Staff">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FreeNow" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Category" type="tns:StaffCategory" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="StaffCategory">
+        <s:restriction base="s:string">
+          <s:enumeration value="Раб" />
+          <s:enumeration value="Наемник" />
+          <s:enumeration value="Убийца" />
+          <s:enumeration value="Оружейник" />
+          <s:enumeration value="Телохранитель" />
+          <s:enumeration value="Адвокат" />
+          <s:enumeration value="Вор" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AddStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staff" type="tns:Staff" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddStaffResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staff" type="tns:Staff" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateStaffResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staff" type="tns:Staff" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveStaffResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoadStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadStaff" />
+  </wsdl:message>
+  <wsdl:message name="LoadStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:AddStaff" />
+  </wsdl:message>
+  <wsdl:message name="AddStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:AddStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateStaff" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveStaff" />
+  </wsdl:message>
+  <wsdl:message name="RemoveStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveStaffResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EvilCorpServiceSoap">
+    <wsdl:operation name="LoadStaff">
+      <wsdl:input message="tns:LoadStaffSoapIn" />
+      <wsdl:output message="tns:LoadStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddStaff">
+      <wsdl:input message="tns:AddStaffSoapIn" />
+      <wsdl:output message="tns:AddStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStaff">
+      <wsdl:input message="tns:UpdateStaffSoapIn" />
+      <wsdl:output message="tns:UpdateStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveStaff">
+      <wsdl:input message="tns:RemoveStaffSoapIn" />
+      <wsdl:output message="tns:RemoveStaffSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EvilCorpServiceSoap" type="tns:EvilCorpServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoadStaff">
+      <soap:operation soapAction="http://tempuri.org/LoadStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStaff">
+      <soap:operation soapAction="http://tempuri.org/AddStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStaff">
+      <soap:operation soapAction="http://tempuri.org/UpdateStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveStaff">
+      <soap:operation soapAction="http://tempuri.org/RemoveStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EvilCorpServiceSoap12" type="tns:EvilCorpServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoadStaff">
+      <soap12:operation soapAction="http://tempuri.org/LoadStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStaff">
+      <soap12:operation soapAction="http://tempuri.org/AddStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStaff">
+      <soap12:operation soapAction="http://tempuri.org/UpdateStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveStaff">
+      <soap12:operation soapAction="http://tempuri.org/RemoveStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EvilCorpService">
+    <wsdl:port name="EvilCorpServiceSoap" binding="tns:EvilCorpServiceSoap">
+      <soap:address location="https://localhost:44329/EvilCorpService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EvilCorpServiceSoap12" binding="tns:EvilCorpServiceSoap12">
+      <soap12:address location="https://localhost:44329/EvilCorpService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,39 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EvilCorp"
+        xmlns:Controls="clr-namespace:EvilCorp.Controls;assembly=EvilCorp.Controls" x:Class="EvilCorp.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="709.6" Width="801.6">
+    <Grid Margin="0,0,3.6,21">
+
+        <ListView x:Name="lvStaff"
+                    ItemsSource="{Binding StaffList}"
+                  SelectedItem="{Binding SelectedStaff}"
+                    Margin="0,0,284,9.8"
+                  SelectionMode="Single" SelectionChanged="lvStaff_SelectionChanged" HorizontalAlignment="Right" Width="504" Height="644" VerticalAlignment="Bottom">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Телефон"
+                                    DisplayMemberBinding="{Binding Phone}"/>
+                    <GridViewColumn Width="auto" Header="Фамилия"
+                                    DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Width="auto" Header="Имя"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Width="100" Header="Специализация"
+                                    DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Width="100" Header="Арестован"
+                                    DisplayMemberBinding="{Binding FreeNow}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Controls:StaffContactControl x:Name="StaffControl" Height="320" Margin="0,0,10,298.6" Width="269" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button Content="Удалить" Name="btDelete" Margin="0,0,23,279.6" HorizontalAlignment="Right" Width="75" Height="19" VerticalAlignment="Bottom" Click="btDelete_Click"/>
+        <Button Content="Обновить" Name="btUpdate" Margin="0,0,103,279.6" HorizontalAlignment="Right" Width="75" Height="19" VerticalAlignment="Bottom" Click="btUpdate_Click"/>
+        <Button Content="Добавить" Name="btAddNew" Margin="0,0,183,279.6" HorizontalAlignment="Right" Width="75" Height="19" VerticalAlignment="Bottom" Click="btAddNew_Click"/>
+
+    </Grid>
+</Window>

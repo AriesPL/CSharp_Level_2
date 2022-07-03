@@ -73,6 +73,26 @@ namespace Asteroid.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bullet {
+            get {
+                object obj = ResourceManager.GetObject("Bullet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap laserRed011 {
+            get {
+                object obj = ResourceManager.GetObject("laserRed011", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap meteorBrown_big1 {
             get {
                 object obj = ResourceManager.GetObject("meteorBrown_big1", resourceCulture);
@@ -116,6 +136,16 @@ namespace Asteroid.Properties {
         internal static System.Drawing.Bitmap planet {
             get {
                 object obj = ResourceManager.GetObject("planet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ship {
+            get {
+                object obj = ResourceManager.GetObject("ship", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
